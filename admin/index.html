@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link href="img/logo/logo.png" rel="icon">
+  <title>Savjetovanja - Dashboard</title>
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="css/ruang-admin.min.css" rel="stylesheet">
+</head>
+
+<body id="page-top">
+  <div id="wrapper">
+    <div id="content-wrapper" class="d-flex flex-column">
+      <div id="content">
+        <!-- TopBar -->
+        <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown no-arrow">
+                <img class="img-profile rounded-circle" src="img/logo/logo.png" width="60px">
+            </li>
+          </ul>
+        </nav>
+        <!-- Topbar -->
+
+        <!-- Container Fluid-->
+        <div class="container-fluid" id="container-wrapper">
+
+          <div class="row mb-3">
+
+
+            <!-- Invoice Example -->
+            <div class="col-xl-12 col-lg-7 mb-4">
+              <div class="card">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h4 class="m-0 font-weight-bold text-primary">Termini - <span id="countryDisplay">Odaberite državu</span></h4>
+                  <div class="btn-group mb-1">
+                    <button class="btn btn-primary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="countrySelectButton">
+                      Zemlja
+                    </button>
+                    <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 48px, 0px);">
+                      <a class="dropdown-item" href="#" onclick="setCountry('Hrvatska')">Hrvatska</a>
+                      <a class="dropdown-item" href="#" onclick="setCountry('Slovenija')">Slovenija</a>
+                      <a class="dropdown-item" href="#" onclick="setCountry('BiH')">BIH</a>
+                      <a class="dropdown-item" href="#" onclick="setCountry('Srbija')">Srbija</a>
+                      <a class="dropdown-item" href="#" onclick="setCountry('Albanija')">Albanija</a>
+                      <a class="dropdown-item" href="#" onclick="setCountry('Kosovo')">Kosovo</a>
+                    </div>
+                    &nbsp;<a href="#" class="btn-lg btn-success" data-toggle="modal" data-target="#exampleModalCenter"
+                    id="#modalCenter">
+                      <i class="fas fa-plus"></i>
+                    </a>
+                  </div>
+                </div>
+                <div class="table-responsive">
+                  <table class="table align-items-center table-flush">
+                    <thead class="thead-light">
+                      <tr>
+                        <th>Grad</th>
+                        <th>Ustanova</th>
+                        <th>Adresa</th>
+                        <th>Datum</th>
+                        <th>Termin</th>
+                        <th>Kontakt</th>
+                        <th>Uređivanje</th>
+                      </tr>
+                    </thead>
+                    <tbody id="list-items">
+
+                    </tbody>
+                  </table>
+                </div>
+                <div class="card-footer"></div>
+              </div>
+            </div>
+          </div>
+
+                    <!-- Modal New Entry -->
+                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalCenterTitle">Novi zapis</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="clearForm()">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+
+
+
+                          <!-- Grad -->
+                          <div class="form-group">
+                            <label for="ustanova">Upišite naziv ustanove</label>
+                          <input class="form-control  mb-3" type="text" placeholder="Grad" id="grad">
+                          </div>
+
+
+
+
+                          <!-- Ustanova -->
+                          <div class="form-group">
+                            <label for="ustanova">Upišite naziv ustanove</label>
+                          <input class="form-control  mb-3" type="text" placeholder="Ustanova" id="ustanova">
+                          </div>
+
+                                                    <!-- Adresa -->
+                                                    <div class="form-group">
+                                                      <label for="ustanova">Upišite adresu</label>
+                                                    <input class="form-control  mb-3" type="text" placeholder="Adresa" id="adresa">
+                                                    </div>
+
+
+                                                    <!-- Datum -->
+                                                    <div class="form-group" id="simple-date1">
+                                                      <label for="simpleDataInput">Odaberite datum</label>
+                                                        <div class="input-group date">
+                                                          <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                                          </div>
+                                                          <input type="text" class="form-control" placeholder="01/03/2022" id="simpleDataInput">
+                                                        </div>
+                                                    </div>
+
+                                              <!-- Vrijeme od-do -->
+                                                    <div class="form-group">
+                                                      <label for="dateRangePicker">Termin</label>
+                                                      <div class="input-daterange input-group">
+                                                        <div class="input-group-prepend">
+                                                          <span class="input-group-text"><i class="fas fa-clock"></i></span>
+                                                        </div>
+                                                        <input type="text" class="input-sm form-control" placeholder="10:30" name="start">
+                                                        <div class="input-group-prepend">
+                                                          <span class="input-group-text">do</span>
+                                                        </div>
+                                                        <input type="text" class="input-sm form-control" placeholder="12:30" name="end">
+                                                      </div>
+                                                    </div>
+
+
+                                                    <!-- Telefon -->
+                                                    <div class="form-group">
+                                                      <label for="ustanova">Upišite kontakt broj</label>
+                                                    <input class="form-control  mb-3" type="text" placeholder="Broj telefona" id="phone">
+                                                    </div>
+
+
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-outline-danger" data-dismiss="modal" onclick="clearForm()">Odbaci</button>
+                          <button type="button" class="btn btn-success" data-dismiss="modal" onclick="postData()">Spremi</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                                      <!-- Modal Delete Entry -->
+                                      <div class="modal fade" id="exampleModalCenterDelete" tabindex="-1" role="dialog"
+                                      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                      <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalCenterTitle">Obriši zapis</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                          </div>
+                                          <div class="modal-body">
+
+                                            Sigurno želite obrisati zapis?
+                  
+                  
+                  
+                  
+                  
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Obriši</button>
+                                            <button type="button" class="btn btn-outline-success" data-dismiss="modal">Odustani</button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                                                          <!-- Modal Delete Entry -->
+                                      <div class="modal fade" id="exampleModalCenterDelete" tabindex="-1" role="dialog"
+                                      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                      <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalCenterTitle">Obriši zapis</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                          </div>
+                                          <div class="modal-body">
+
+                                            Sigurno želite obrisati zapis?
+                  
+                  
+                  
+                  
+                  
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Obriši</button>
+                                            <button type="button" class="btn btn-outline-success" data-dismiss="modal">Odustani</button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+
+              
+
+                                      <!-- Modal Select Country -->
+                                      <div class="modal fade" id="countrySelector" tabindex="-1" role="dialog"
+                                      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                      <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalCenterTitle">Obriši zapis</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                          </div>
+                                          <div class="modal-body">
+
+                                            Sigurno želite obrisati zapis?
+                  
+                  
+                  
+                  
+                  
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Obriši</button>
+                                            <button type="button" class="btn btn-outline-success" data-dismiss="modal">Odustani</button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+
+
+
+        </div>
+        <!---Container Fluid-->
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Scroll to top -->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="js/ruang-admin.min.js"></script>
+  <script src="vendor/chart.js/Chart.min.js"></script>
+  <script src="js/demo/chart-area-demo.js"></script>  
+  <script src="js/scripts/read.js"></script>
+  <script src="js/scripts/write.js"></script>
+  <script src="js/app.js"></script>
+</body>
+
+</html>
